@@ -20,10 +20,15 @@ const studentSchema = new Schema<Students>({
     enum: ['O+', 'O-', 'A+', 'A-', 'AB+', 'AB-'], // Enforcing the allowed values
     required: true,
   },
+  CourseEnroll:{type:Boolean, default:false },
+  CourseID: [{ type: Schema.Types.ObjectId, ref: "Course", default: [] }], // Default is an empty array
+
   Image: { type: String, required: true },
+
   Father_Image: { type: String },
   Mother_Image: { type: String }, // Fixed the typo
-});
+},{timestamps:true}
+);
 
 // Exporting the model
 export const StudentModel = model<Students>('Student', studentSchema);
