@@ -10,8 +10,7 @@ export const authSchema = new Schema<Authinterface>({
     email: { type: String, required: [true, "Email is required"] },
     password: { type: String, required: [true, "Password is required"] },
     image: { type: String, required: [true, "Image is required"] },
-    role: { type: String, required: [true, "Role is required"] },
-},{timestamps:true, versionKey:false});
+}, {timestamps:true, versionKey:false});
 
 authSchema.pre('save', async function(this: Authinterface, next:NextFunction) {
     const user = this
@@ -24,7 +23,6 @@ authSchema.pre('save', async function(this: Authinterface, next:NextFunction) {
     user.password = password;
     next()
 })
-
 
 export const authModel = mongoose.model<Authinterface>("auth", authSchema)
 

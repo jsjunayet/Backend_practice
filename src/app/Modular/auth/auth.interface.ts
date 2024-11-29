@@ -3,5 +3,4 @@ export interface Authinterface {
     email:string,
     password:string,
     image:string,
-    role:string
 }
