@@ -1,7 +1,8 @@
-import { Students } from './Student.interface';
+
+import { TStudent } from './Student.interface';
 import { StudentModel } from './Student.model';
 
-const createStudentInBD = async (student: Students) => {
+const createStudentInBD = async (student: TStudent) => {
   const result = await StudentModel.create(student);
   return result;
 };

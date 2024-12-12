@@ -1,8 +1,8 @@
-import express from "express"
-import { controllerauth } from "./auth.Controllers"
-const router = express.Router()
+// import express from "express"
+// import { controllerauth } from "./auth.Controllers"
+// const router = express.Router()
 
-router.post("/signup", controllerauth.postsingup)
-router.post("/login", controllerauth.postLogin)
+// router.post("/signup", controllerauth.postsingup)
+// router.post("/login", controllerauth.postLogin)
 
-export const authRouter = router
+// export const authRouter = router

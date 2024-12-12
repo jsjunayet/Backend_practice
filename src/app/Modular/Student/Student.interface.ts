@@ -1,19 +1,44 @@
-import { ObjectId } from "mongoose";
+import { Types } from "mongoose";
 
-export interface Students {
-  Student_Name: {
-    First_Name: string;
-    Middle_Name?: string;
-    Last_Name: string;
-  };
-  Gender: 'male' | 'female';
-  Address: string;
-  Father_Name: string;
-  Mother_Name: string;
-  Blood_Group: 'O+' | 'O-' | 'A+' | 'A-' | 'AB+' | 'AB-';
-  Image: string;
-  CourseEnroll:boolean
-  CourseID?:string | ObjectId | undefined
-  Father_Image?: string;
-  Mother_Image?: string; // Fixed the typo
+
+export type TStudentName ={
+  firstName: string;
+  middleName?: string;
+  lastName: string;
 }
+export type TGuardian = {
+  fatherName: string;
+  fatherOccupation: string;
+  fatherContactNo: string;
+  motherName: string;
+  motherOccupation: string;
+  motherContactNo: string;
+};
+
+export type TLocalGuardian = {
+  name: string;
+  occupation: string;
+  contactNo: string;
+  address: string;
+};
+
+
+export type TStudent = {
+  id: string;
+  user: Types.ObjectId;
+  password: string;
+  name: TStudentName;
+  gender: 'male' | 'female' | 'other';
+  dateOfBirth?: string;
+  email: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  bloogGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
+  presentAddress: string;
+  permanentAddress: string;
+  guardian: TGuardian;
+  localGuardian: TLocalGuardian;
+  profileImg?: string;
+  admissionSemester: Types.ObjectId;
+  isDeleted: boolean;
+};
