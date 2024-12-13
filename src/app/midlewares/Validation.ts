@@ -10,7 +10,6 @@ const validation = (Schema:AnyZodObject)=>{
     next()
    
         } catch (err) {
-            console.log(err);
          next(err)
         }
       };
