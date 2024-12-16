@@ -35,13 +35,15 @@ const userservicepost =async(password:string, student:TStudent)=>{
             }
         }
         session.commitTransaction();
-        session.endSession()
         return result;
 
-    }catch(err){
-        session.abortTransaction();
+    }catch(err:unknown){
+      if(session.inTransaction()){
+       await session.abortTransaction();
+      }
+        throw new AppErrors(400, "this is not okay")
+    }finally{
         session.endSession()
-        throw new AppErrors(500, `${err}`)
     }
    
 }
