@@ -4,15 +4,47 @@ import AppErrors from '../../errors/AppErrors';
 import { TStudent } from './Student.interface';
 import { StudentModel } from './Student.model';
 import { userModel } from '../user/user.model';
+import Querybuilder from '../../builder/Querybuilder';
 
 const createStudentInBD = async (student: TStudent) => {
   const result = await StudentModel.create(student);
   return result;
 };
+const getsinglestudent = async (studentID:string) => {
+  const result = await StudentModel.findById(studentID)
+  return result;
+};
 
-const getstudentAlldata= async ()=>{
-  const result = await StudentModel.find()
-  return result
+const getstudentAlldata= async (query:Record<string, unknown>)=>{
+//   const queryObj = {...query}
+//   const searchTerm =query.searchTerm || ""
+//   const searching = StudentModel.find(
+//     {
+//       $or: ["email", "id", "gender"].map((fields)=>({
+//         [fields]:{$regex:searchTerm, $options:"i"}
+//       }))
+//     }
+//   );
+//   const ExculsiveFeild =["searchTerm", "sort", "limit", "page", "field"]
+//   ExculsiveFeild.forEach((el)=>delete queryObj[el])
+//   const Filtering = searching.find(queryObj)
+//  let sort = "-createdAt"
+//  if(query.sort){
+//   sort = query.sort as string
+//  }
+//  const sorting =Filtering.sort(sort)
+//  const page = Number(query.page) || 1
+//  const limit = Number(query.limit) || 10
+//  const skip = (page-1)*limit
+//  const paginationQuery = sorting.skip(skip).limit(limit)
+const studentQueryFilter = new Querybuilder(StudentModel.find().populate('admissionSemester'), query)
+  .searching(["email", "id", "gender"])
+  .Filtering()
+  .sorting()
+  .pagination()
+const result = await studentQueryFilter.QueryModel.exec();  // Execute query
+
+return result;
 }
 const studentUpdateService= async (id:string, studentData:Partial<TStudent>)=>{
   const{name, guardian, localGuardian, ...remainstudentData}= studentData
@@ -75,5 +107,6 @@ export const student_service = {
   createStudentInBD,
   getstudentAlldata,
   Deletedstudent,
-  studentUpdateService
+  studentUpdateService,
+  getsinglestudent
 };
