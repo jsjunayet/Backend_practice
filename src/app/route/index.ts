@@ -4,6 +4,7 @@ import { user_router } from "../Modular/user/user.route";
 import { semester_Route } from "../Modular/academicSemester/academicSemester.router";
 import { academicFaculty_router } from "../Modular/academicFaculty/academicFaculty.route";
 import { academicDepartment_router } from "../Modular/academicDepartment/academicDepartment.route";
+import { semesterRegistrationRoutes } from "../semesterRegistation/semesterRegistration.route";
 
 const router = Router();
  const allrouter = [
@@ -26,6 +27,10 @@ const router = Router();
     {
     path:"/academicDepartment",
     router: academicDepartment_router
+   },
+    {
+    path:"/semesterRegitration",
+    router: semesterRegistrationRoutes
    }
 ]
 allrouter.forEach((route)=>router.use(route.path, route.router))
