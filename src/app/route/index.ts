@@ -31,6 +31,10 @@ const router = Router();
     {
     path:"/semesterRegitration",
     router: semesterRegistrationRoutes
+   },
+    {
+    path:"/semesterRegitration",
+    router: semesterRegistrationRoutes
    }
 ]
 allrouter.forEach((route)=>router.use(route.path, route.router))
